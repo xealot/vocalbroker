@@ -1,0 +1,11 @@
+.idea
+settings_local.py
+settings_dev.py
+*.pyc
+.DS_Store
+.coverage
+static/coverage
+/nbproject/private/
+/nbproject/
+pod.db
+/media/
