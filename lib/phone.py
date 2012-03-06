@@ -1,5 +1,4 @@
 import phonenumbers
-from phonenumbers import NumberParseException
 
 def convert_to_e164(raw_phone):
     if not raw_phone:

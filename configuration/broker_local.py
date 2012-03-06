@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
@@ -50,12 +50,14 @@ SECRET_KEY = 'crlr6q0%oq#(o0je^032q5n42g69r&02@l_go503(_0l@@9iby'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     #'django.template.loaders.filesystem.Loader',
-    #'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.app_directories.Loader',
     #     'django.template.loaders.eggs.Loader',
     )
 
 MIDDLEWARE_CLASSES = (
     'lib.middleware.twilio_signed.TwilioSignedRequest',
+    'lib.middleware.callersession.SessionMiddleware',
+    #'lib.middleware.error.ErrorLogMiddleware',
     #'django.middleware.common.CommonMiddleware',
     #'django.contrib.sessions.middleware.SessionMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,6 +88,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+SESSION_BACKEND = 'lib.middleware.callersession.CachedCallSessionStore'
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
@@ -97,7 +101,7 @@ LOGGING = {
     'formatters': {
         'simple': {
             'format': '%(levelname)s [%(module)s] - %(message)s'
-        },
+        }
     },
     'handlers': {
         'console':{
@@ -112,6 +116,8 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
+        'level': 'DEBUG',
+
     },
     'loggers': {
         'django.request': {
@@ -124,3 +130,5 @@ LOGGING = {
 
 
 TWILIO_AUTH_TOKEN = '62a6300ce1272134fbbd10ae45d218c0'
+TWILIO_ACCOUNT_SID = 'ACd61a084824884699a1413e71f40a3b5a'
+TWILIO_APP_SID = 'AP1812e773105345a397a849121138359a'
